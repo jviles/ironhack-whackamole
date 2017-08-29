@@ -8,22 +8,16 @@ function Board (rows,columns){
 
 Board.prototype.generateGrid = function(){
 	console.log("generate grid running");
-	$("#board").append("<section>hjlk</section>");
-	for(x=0,x<row,x++){
-		for(y=0, y<columns,y++){
-			$("#board").append("<div>cell</div>");
+	for(var y = 0; y < this.rows; y++){
+		for(var x = 0; x< this.columns; x++){
+			$("#board").append($("<div>")
+				.addClass("cell")
+				.attr("row",y)
+				.attr("column",x)
+			);
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
 
 
 

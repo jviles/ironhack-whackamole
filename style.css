@@ -8,3 +8,15 @@ body{
 	font-size: 16px;
 	min-height: 100%;
 }
+
+#board {
+
+
+}
+
+.cell {
+	background-color: green;
+	width: 10px;
+	height: 10px;
+
+}
