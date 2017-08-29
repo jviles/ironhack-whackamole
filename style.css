@@ -8,20 +8,21 @@ body{
 	font-size: 16px;
 	min-height: 100%;
 	background-color: green;
+	width: 800px;
+	margin: 0 auto;
+
 }
 
+
 #board {
-
-	margin top:50px
-
-	border: 10px;
+	background-color: yellow;
 	
 	
 
 }
 
 .cell {
-	background-color: maroon;
+	background-color: green;
 	border-radius: 4px;
   	box-sizing: border-box;
   	height: 130px;

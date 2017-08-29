@@ -39,6 +39,8 @@ Board.prototype.generateRandomMoles = function (){
 		var yy= Math.floor(Math.random()*this.rows);
 		var xx= Math.floor(Math.random()*this.columns);
 
+
+
 	};
 }
 
@@ -59,6 +61,6 @@ var board;
 $(document).ready(function() {
  
   console.log("jquery running");
-  board = new Board(4,4);
+  board = new Board(4,5);
  /* mole = new Mole()*/
 });
