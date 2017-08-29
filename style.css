@@ -11,12 +11,18 @@ body{
 
 #board {
 
+	background-color: green;
+	
 
 }
 
 .cell {
-	background-color: green;
-	width: 10px;
-	height: 10px;
+	background-color: maroon;
+	border-radius: 4px;
+  	box-sizing: border-box;
+  	height: 130px;
+  	float: left;
+  	margin: 10px;
+ 	width: 130px;
 
 }

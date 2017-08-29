@@ -19,14 +19,28 @@ Board.prototype.generateGrid = function(){
 	}
 }
 
+function Mole (){
+	this.position = position;
+	this.time=time;
+	this.score=score;
+	this.kind=kind
 
+	this.numbermoles();
+}
+ Mole.prototype.numbermoles = function (){
+
+ 	var nmoles = Math.floor(Math.random() * 5)
+ 	console.log (nmoles);
+};
 
 
 
 var board;
+var mole;
 
 $(document).ready(function() {
  
   console.log("jquery running");
   board = new Board(4,4);
+  mole = new Mole()
 });
