@@ -19,6 +19,25 @@ Board.prototype.generateGrid = function(){
 	}
 }
 
+Board.prototype.generateRandomMoles = function (nmoles){
+	console.log("generate a randomMole");
+	for (i=0;i<nmoles;i++){
+		var yy= Math.floor(Math.random()*this.rows.length);
+		var xx= Math.floor(Math.random()*this.columns.length);
+		console.log(yy);
+		console.log(xx);
+		$(".cell:contains(yy)") && $(".cell:contains(xx)".css('background-color', 'blue');
+
+	}
+	
+	console.log(yy);
+	console.log(xx);
+
+
+		}
+	}
+}
+
 function Mole (){
 
 
@@ -27,8 +46,10 @@ function Mole (){
  Mole.prototype.numbermoles = function (){
 
  	var nmoles = Math.floor(Math.random() * 5)
- 	console.log (nmoles);
+ 	console.log ("numero de topos aleatorios "+nmoles);
 };
+
+
 
 
 
