@@ -20,10 +20,7 @@ Board.prototype.generateGrid = function(){
 }
 
 function Mole (){
-	this.position = position;
-	this.time=time;
-	this.score=score;
-	this.kind=kind
+
 
 	this.numbermoles();
 }
