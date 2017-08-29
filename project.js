@@ -3,7 +3,9 @@ function Board (rows,columns){
 	this.rows    = rows;
 	this.columns = columns;
 
+	
 	this.generateGrid();
+	this.generateRandomMoles();
 }
 
 Board.prototype.generateGrid = function(){
@@ -19,46 +21,44 @@ Board.prototype.generateGrid = function(){
 	}
 }
 
-Board.prototype.generateRandomMoles = function (nmoles){
-	console.log("generate a randomMole");
-	for (i=0;i<nmoles;i++){
-		var yy= Math.floor(Math.random()*this.rows.length);
-		var xx= Math.floor(Math.random()*this.columns.length);
-		console.log(yy);
-		console.log(xx);
-		$(".cell:contains(yy)") && $(".cell:contains(xx)".css('background-color', 'blue');
-
-	}
+Board.prototype.generateRandomMoles = function (){
 	
-	console.log(yy);
-	console.log(xx);
+	console.log("generate a randomMole");
 
-
-		}
-	}
-}
-
-function Mole (){
-
-
-	this.numbermoles();
-}
- Mole.prototype.numbermoles = function (){
-
- 	var nmoles = Math.floor(Math.random() * 5)
+ 	var nmoles = Math.floor(Math.random() * 5);
  	console.log ("numero de topos aleatorios "+nmoles);
-};
+ 	if (nmoles===0){
+ 		nmoles=1;
+ 	}
+ 	console.log("abans del bucle for");
+
+	for (var i = 0; i < nmoles; i++){
+
+		console.log("despres del bucle for");
+
+		var yy= Math.floor(Math.random()*this.rows);
+		var xx= Math.floor(Math.random()*this.columns);
+
+	};
+}
+
+/*function Mole (){
+
+
+	
+}*/
+ 
 
 
 
 
 
 var board;
-var mole;
+/*var mole;*/
 
 $(document).ready(function() {
  
   console.log("jquery running");
   board = new Board(4,4);
-  mole = new Mole()
+ /* mole = new Mole()*/
 });
