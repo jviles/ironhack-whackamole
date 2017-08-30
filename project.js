@@ -8,11 +8,13 @@ function Board (rows,columns){
 	this.rows    = rows;
 	this.columns = columns;
 	this.listMoles = [];
+	this.score =0;
 
 	this.drawGrid();
 	this.generateMoles();
 	this.drawMoles();
 	this.clickOnCell();
+	
 }
 
 
@@ -48,7 +50,7 @@ Board.prototype.randomPosition = function () {
 	var hasMole = $('.cell[row="'+ y +'"][column="'+ x +'"]').hasClass('mole');
 	//console.log(hasMole);
 	if( hasMole ) {
-		this.randomPosition(); //Keep calling since it was false.To check if you have a mole on the position
+		this.randomPosition(); //Keep calling since it was false.To check if you have a mole on the position and putting on array listMoles
 	}	
 	return {x, y};
 }
@@ -56,24 +58,42 @@ Board.prototype.randomPosition = function () {
 
 Board.prototype.drawMoles = function () {
 
-	//console.log(this.listMoles);
+	console.log(this.listMoles);
 
 	this.listMoles.forEach (function (mole) {
 		$('.cell[row="'+ mole.position.y +'"][column="'+ mole.position.x +'"]').addClass('mole');
-	});
+	});//here we are searching the listMoles and adding a new class in order to change the image background
 };
 
 Board.prototype.clickOnCell = function () {
 
 $('.cell').on('click', function (){
-	console.log ("clik works");
+
+	console.log ("click works");
+	
+
 	if($(this).hasClass ('mole')) {
+
+	//this.molesScored();
+	var totalScore=0;
+	totalScore = totalScore+10;
+	
+
 	$(this).removeClass ('mole');	
+
 	console.log(this.listMoles);	
 	}
-	
+
+	console.log (totalScore);
 	console.log(this.listMoles);
 });
+
+/*Board.prototype.molesScored = function () {
+	var totalScore=0;
+	return totalScore+=10;
+	console.log(totalScore);
+
+}*/
 
 }
 
@@ -85,7 +105,8 @@ $('.cell').on('click', function (){
 function Mole (position){
 	this.position = {
 		x: position.x,
-		y: position.y
+		y: position.y,
+		//score:10
 	};
 	this.time = 5000;
 }
