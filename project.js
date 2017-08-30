@@ -62,6 +62,6 @@ var board;
 $(document).ready(function() {
  
   console.log("jquery running");
-  board = new Board(4,5);
+  board = new Board(3,5);
  /* mole = new Mole()*/
 });
