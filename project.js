@@ -41,10 +41,12 @@ Board.prototype.generateRandomMoles = function (){
 		console.log("noves columnes "+yy);
 		console.log("noves files "+xx);
 		$("#board>.cell").attr("row",yy).attr("column",xx)
-			.css("background-image","url('imagen/animal-158236_1280.png')")
-			.css ("background-size", "100px")
+			.css ("background-image","url('imagen/animal-158236_1280.png')")
+			.css ("background-size", "150px")
 			.css ("background-repeat","no-repeat")
-			.css ("background-opa")
+			
+			
+			
 
 
 
