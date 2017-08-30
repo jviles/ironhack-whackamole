@@ -9,12 +9,13 @@ function Board (rows,columns){
 	this.columns = columns;
 	this.listMoles = [];
 
-	this.generateGrid();
+	this.drawGrid();
 	this.generateMoles();
+	this.drawMoles();
 }
 
-Board.prototype.generateGrid = function(){
-	console.log("generate grid running");
+
+Board.prototype.drawGrid = function () {
 	for(var y = 0; y < this.rows; y++){
 		for(var x = 0; x< this.columns; x++){
 			$("#board").append($("<div>")
@@ -26,7 +27,8 @@ Board.prototype.generateGrid = function(){
 	}
 }
 
-Board.prototype.generateMoles = function (){
+
+Board.prototype.generateMoles = function () {
 	for(var i = 0; i < this.randomNumberOfMoles() ; i++){
 		this.listMoles.push(new Mole(this.randomPosition()));
 	}
@@ -34,9 +36,10 @@ Board.prototype.generateMoles = function (){
 }
 
 
-Board.prototype.randomNumberOfMoles = function (){
+Board.prototype.randomNumberOfMoles = function () {
 	return Math.floor(Math.random() * (5 - 1) + 1);
 }
+
 
 Board.prototype.randomPosition = function () {
 	var x = Math.floor(Math.random()*this.columns);
@@ -44,9 +47,19 @@ Board.prototype.randomPosition = function () {
 	var hasMole = $('.cell[row="'+ y +'"][column="'+ x +'"]').hasClass('mole');
 	console.log(hasMole);
 	if( hasMole ) {
-		this.randomPosition();
+		this.randomPosition(); //Keep calling since it was false.To check if you have a mole on the position
 	}	
 	return {x, y};
+}
+
+
+Board.prototype.drawMoles = function () {
+
+	console.log(this.listMoles);
+
+	this.listMoles.forEach (function (mole) {
+		$('.cell[row="'+ mole.position.y +'"][column="'+ mole.position.x +'"]').addClass('mole');
+	});
 }
 
 

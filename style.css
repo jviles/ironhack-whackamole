@@ -36,8 +36,6 @@ h1{
 
 #start-game {
 	margin-left: 1075px;
-
-
 }
 
 .cell {
@@ -54,8 +52,9 @@ h1{
  	background-size: 150%;
 }
 
-
 .cell.mole {
 	background-image: url('imagen/animal-158236_1280.png');
 	background-repeat:no-repeat;
+	background-size: 105%;
+}
 }
