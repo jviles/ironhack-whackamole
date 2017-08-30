@@ -12,6 +12,7 @@ function Board (rows,columns){
 	this.drawGrid();
 	this.generateMoles();
 	this.drawMoles();
+	this.clickOnCell();
 }
 
 
@@ -32,7 +33,7 @@ Board.prototype.generateMoles = function () {
 	for(var i = 0; i < this.randomNumberOfMoles() ; i++){
 		this.listMoles.push(new Mole(this.randomPosition()));
 	}
-	console.log(this.listMoles);
+	//console.log(this.listMoles);
 }
 
 
@@ -45,7 +46,7 @@ Board.prototype.randomPosition = function () {
 	var x = Math.floor(Math.random()*this.columns);
 	var y = Math.floor(Math.random()*this.rows);
 	var hasMole = $('.cell[row="'+ y +'"][column="'+ x +'"]').hasClass('mole');
-	console.log(hasMole);
+	//console.log(hasMole);
 	if( hasMole ) {
 		this.randomPosition(); //Keep calling since it was false.To check if you have a mole on the position
 	}	
@@ -55,14 +56,26 @@ Board.prototype.randomPosition = function () {
 
 Board.prototype.drawMoles = function () {
 
-	console.log(this.listMoles);
+	//console.log(this.listMoles);
 
 	this.listMoles.forEach (function (mole) {
 		$('.cell[row="'+ mole.position.y +'"][column="'+ mole.position.x +'"]').addClass('mole');
 	});
+};
+
+Board.prototype.clickOnCell = function () {
+
+$('.cell').on('click', function (){
+	console.log ("clik works");
+	if($(this).hasClass ('mole')) {
+	$(this).removeClass ('mole');	
+	console.log(this.listMoles);	
+	}
+	
+	console.log(this.listMoles);
+});
+
 }
-
-
 
 
 //   $MOLES    // 
