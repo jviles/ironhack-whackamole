@@ -1,11 +1,16 @@
 
+
+
+//   BOARD    // 
+// ========== //
+
 function Board (rows,columns){
 	this.rows    = rows;
 	this.columns = columns;
+	this.listMoles = [];
 
-	
 	this.generateGrid();
-	this.generateRandomMoles();
+	this.generateMoles();
 }
 
 Board.prototype.generateGrid = function(){
@@ -21,55 +26,50 @@ Board.prototype.generateGrid = function(){
 	}
 }
 
-Board.prototype.generateRandomMoles = function (){
-	
-	console.log("generate a randomMole");
-
- 	var nmoles = Math.floor(Math.random() * 5);
- 	console.log ("numero de topos aleatorios "+nmoles);
- 	if (nmoles===0){
- 		nmoles=1;
- 	}
- 	console.log("abans del bucle for");
-
-	for (var i = 0; i < nmoles; i++){
-
-		console.log("despres del bucle for");
-
-		var yy= Math.floor(Math.random()*this.rows);
-		var xx= Math.floor(Math.random()*this.columns);
-		console.log("noves columnes "+yy);
-		console.log("noves files "+xx);
-		$("#board>.cell").attr("row",yy).attr("column",xx)
-			.css ("background-image","url('imagen/animal-158236_1280.png')")
-			.css ("background-size", "150px")
-			.css ("background-repeat","no-repeat")
-			
-			
-			
-
-
-
-	};
+Board.prototype.generateMoles = function (){
+	for(var i = 0; i < this.randomNumberOfMoles() ; i++){
+		this.listMoles.push(new Mole(this.randomPosition()));
+	}
+	console.log(this.listMoles);
 }
 
-/*function Mole (){
+
+Board.prototype.randomNumberOfMoles = function (){
+	return Math.floor(Math.random() * (5 - 1) + 1);
+}
+
+Board.prototype.randomPosition = function () {
+	var x = Math.floor(Math.random()*this.columns);
+	var y = Math.floor(Math.random()*this.rows);
+	//$('.cell').hasclass('')
+	return {x, y};
+}
 
 
-	
-}*/
+
+
+//   $MOLES    // 
+// ========== //
+
+
+function Mole (position){
+	this.position = {
+		x: position.x,
+		y: position.y
+	};
+	this.time = 5000;
+}
  
 
 
 
-
+// INITIALIZE // 
+// ========== //
 
 var board;
-/*var mole;*/
 
 $(document).ready(function() {
  
-  console.log("jquery running");
   board = new Board(3,5);
- /* mole = new Mole()*/
+
 });

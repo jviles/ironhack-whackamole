@@ -41,7 +41,7 @@ h1{
 }
 
 .cell {
-	background-color: green;
+	/*background-color: green;*/
 	border-radius: 4px;
 	border: 1px solid black;
   	box-sizing: border-box;
@@ -52,4 +52,10 @@ h1{
  	background-image: url('imagen/molehill-190493_1920.jpg');
  	background-repeat: repeat-x;
  	background-size: 150%;
+}
+
+
+.cell.mole {
+	background-image: url('imagen/animal-158236_1280.png');
+	background-repeat:no-repeat;
 }
