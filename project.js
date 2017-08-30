@@ -38,6 +38,7 @@ Board.prototype.generateRandomMoles = function (){
 
 		var yy= Math.floor(Math.random()*this.rows);
 		var xx= Math.floor(Math.random()*this.columns);
+		$("#board.cell").attr("row",yy).attr("column",xx)
 
 
 
