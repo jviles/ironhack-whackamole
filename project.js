@@ -41,7 +41,11 @@ Board.prototype.randomNumberOfMoles = function (){
 Board.prototype.randomPosition = function () {
 	var x = Math.floor(Math.random()*this.columns);
 	var y = Math.floor(Math.random()*this.rows);
-	//$('.cell').hasclass('')
+	var hasMole = $('.cell[row="'+ y +'"][column="'+ x +'"]').hasClass('mole');
+	console.log(hasMole);
+	if( hasMole ) {
+		this.randomPosition();
+	}	
 	return {x, y};
 }
 
