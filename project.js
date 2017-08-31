@@ -12,9 +12,10 @@ function Board (rows,columns){
 
 	this.drawGrid();
 	this.generateMoles();
-	
 	this.drawMoles();
-	this.cleaningMoles();
+
+
+	//this.cleaningMoles();
 	this.clickOnCell();
 	
 }
@@ -61,60 +62,56 @@ Board.prototype.randomPosition = function () {
 
 Board.prototype.drawMoles = function () {
 
-	//console.log(this.listMoles);
+	console.log(this.listMoles);
 
-	this.listMoles.forEach (function (mole) {
-		$('.cell[row="'+ mole.position.y +'"][column="'+ mole.position.x +'"]').addClass('mole');
-
-		setTimeout(this.cleaningMoles(), moles.time);
-	
+	this.listMoles.forEach (function (mole, index) {
+		if(mole !== null){
+			$('.cell[row="'+ mole.position.y +'"][column="'+ mole.position.x +'"]')
+			.addClass('mole')
+			.attr("mole-index", index);
+		}
 	});//here we are searching the listMoles and adding a new class in order to change the image background
 
+	//setTimeout(this.cleaningMoles(), 5000);
+	
 };
+
+Board.prototype.clickOnCell = function () {
+	var that = this;
+	$('.cell').on('click', function (){
+
+		if( $(this).hasClass('mole') ) {
+			console.log($(this));
+			that.removeMoleFromArray($(this).attr('mole-index'));
+			$(this).removeAttr('mole-index').removeClass('mole');
+
+		}
+	});
+};
+
+
+Board.prototype.removeMoleFromArray = function(index) {
+	this.listMoles[index] = null;
+	console.log('this.listMoles after remove', this.listMoles);
+}
+
 
 Board.prototype.cleaningMoles = function () {
 
-		this.listMoles.forEach (function (mole){
-		$('.cell[row="'+ mole.position.y +'"][column="'+ mole.position.x +'"]').removeClass('mole');
-		});
+	this.listMoles.forEach (function (mole){
+	$('.cell[row="'+ mole.position.y +'"][column="'+ mole.position.x +'"]').removeClass('mole');
+	});
 };
 
 
-Board.prototype.clickOnCell = function () {
 
-$('.cell').on('click', function (){
-	
-	//console.log ("click works");
 
-	if($(this).hasClass ('mole')) {
-	console.log($(this));
-	var searchingScore=0;
-	var value=0;
-	var Totalvalue=0;
-	searchingScore=new Mole(score);
-	console.log (searchingScore.score);
-	value= searchingScore.score;
-	console.log(value);
-	Totalvalue += value;
-	console.log (Totalvalue);
-	//this.molesScored(searchingScore.score);
-	$(this).removeClass ('mole');	
-	
 
-	//console.log(this.listMoles);	
-	}
-
-	return searchingScore;
-	//console.log(this.listMoles);
-});
 
 Board.prototype.molesScored = function (value) {
 
 	  	this.initialScore += value;
 };
-
-}
-
 
 
 
