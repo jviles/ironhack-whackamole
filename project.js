@@ -12,7 +12,9 @@ function Board (rows,columns){
 
 	this.drawGrid();
 	this.generateMoles();
+	
 	this.drawMoles();
+	this.cleaningMoles();
 	this.clickOnCell();
 	
 }
@@ -59,13 +61,24 @@ Board.prototype.randomPosition = function () {
 
 Board.prototype.drawMoles = function () {
 
-	console.log(this.listMoles);
+	//console.log(this.listMoles);
 
 	this.listMoles.forEach (function (mole) {
 		$('.cell[row="'+ mole.position.y +'"][column="'+ mole.position.x +'"]').addClass('mole');
+
+		setTimeout(this.cleaningMoles(), moles.time);
 	
 	});//here we are searching the listMoles and adding a new class in order to change the image background
+
 };
+
+Board.prototype.cleaningMoles = function () {
+
+		this.listMoles.forEach (function (mole){
+		$('.cell[row="'+ mole.position.y +'"][column="'+ mole.position.x +'"]').removeClass('mole');
+		});
+};
+
 
 Board.prototype.clickOnCell = function () {
 
