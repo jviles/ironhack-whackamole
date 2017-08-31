@@ -26,6 +26,12 @@ h1{
 }
 
 
+#score {
+
+	margin-left: 1075px;
+	float: left;
+}
+
 #board {
 	margin: 5px solid black;
 	width: 800px;

@@ -63,38 +63,46 @@ Board.prototype.drawMoles = function () {
 
 	this.listMoles.forEach (function (mole) {
 		$('.cell[row="'+ mole.position.y +'"][column="'+ mole.position.x +'"]').addClass('mole');
+	
 	});//here we are searching the listMoles and adding a new class in order to change the image background
 };
 
 Board.prototype.clickOnCell = function () {
 
-$('.cell').click (function (){//quina diferencia hi ha amb $('cell').on('click' function ()){}
+$('.cell').on('click', function (){
 	
-	console.log ("click works");
+	//console.log ("click works");
 
 	if($(this).hasClass ('mole')) {
-		var score =0;
-		score+10;
-		console.log(score);
-		console.log(this.score);
+	console.log($(this));
+	var searchingScore=0;
+	var value=0;
+	var Totalvalue=0;
+	searchingScore=new Mole(score);
+	console.log (searchingScore.score);
+	value= searchingScore.score;
+	console.log(value);
+	Totalvalue += value;
+	console.log (Totalvalue);
+	//this.molesScored(searchingScore.score);
 	$(this).removeClass ('mole');	
 	
 
 	//console.log(this.listMoles);	
 	}
 
-	
+	return searchingScore;
 	//console.log(this.listMoles);
 });
 
-/*Board.prototype.molesScored = function () {
-	var totalScore=0;
-	return totalScore+=10;
-	console.log(totalScore);
+Board.prototype.molesScored = function (value) {
 
-}*/
+	  	this.initialScore += value;
+};
 
 }
+
+
 
 
 //   $MOLES    // 
