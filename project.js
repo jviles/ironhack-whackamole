@@ -5,19 +5,20 @@
 // ========== //
 
 function Board (rows,columns){
-	this.rows    = rows;
-	this.columns = columns;
-	this.listMoles = [];
-	this.initialScore=0;
+	this.rows                = rows;
+	this.columns             = columns;
+	this.listMoles           = [];
+	this.initialScore        = 0;
+	this.totalMoles          = 0;
+	this.canMoreMolesBeAdded = true;
 
 	this.drawGrid();
-	this.generateMoles();
-	this.drawMoles();
+	this.massMoleGeneration();
 
 
 	//this.cleaningMoles();
 	this.clickOnCell();
-	
+	this.start();
 }
 
 //DRAWING THE GRID ON THE WEB DOCUMENT
@@ -35,27 +36,54 @@ Board.prototype.drawGrid = function () {
 }
 
 //CREATING A RANDOM MOLES CALLING THE OBJECT AND INCLUDING A RANDOM POSITION
-Board.prototype.generateMoles = function () {
-	for(var i = 0; i < this.randomNumberOfMoles() ; i++){
-		this.listMoles.push(new Mole(this.randomPosition()));
+Board.prototype.massMoleGeneration = function () {
+	this.canMoreMolesBeAdded = false;
+
+	var max = this.randomNumber(1, 3)
+
+	while(max > 4 && max >= this.rows*this.columns-this.totalMoles) {
+		max = this.randomNumber(1, 3);
 	}
-	//console.log(this.listMoles);
+	console.log('right MAX', max);
+	this.generateMoles(max);
+
+}
+
+Board.prototype.generateMoles = function(max) {
+	var numberOfMoles = this.randomNumber(1, max);
+	this.totalMoles += numberOfMoles;
+
+	var position
+	for(var i = 0; i < numberOfMoles; i++){
+		position = this.randomPosition();
+		while(!position) {
+			position = this.randomPosition();
+		}
+		this.listMoles.push(new Mole(position));
+	}
+	console.log('totalMoles', this.totalMoles);
+	this.canMoreMolesBeAdded = true;
+	setTimeout(this.drawMoles.bind(this), this.randomNumber(1,4)*1000);
 }
 
 
 // CREATING HOW MUCH RANDOM POSITION. AS A DEFAULT WE PUT IT 5
-Board.prototype.randomNumberOfMoles = function () {
-	return Math.floor(Math.random() * (5 - 1) + 1);
+Board.prototype.randomNumber = function (min, max) {
+	return Math.floor(Math.random() * (max - min) + min);
 }
 
 // PROVING A RANDOM POSITION TO A MOLE
 Board.prototype.randomPosition = function () {
 	var x = Math.floor(Math.random()*this.columns);
 	var y = Math.floor(Math.random()*this.rows);
+	console.log(x);
+	console.log(y);
 	var hasMole = $('.cell[row="'+ y +'"][column="'+ x +'"]').hasClass('mole');// CHECKIN IF YOU HAVE A MOLE ON THE RANDOM POSITION
+	console.log(hasMole);
 	if( hasMole ) { // TO CHECK 
-		this.randomPosition(); //Keep calling since it was false.To check if you have a mole on the position and putting on array listMoles
+		return false;
 	}	
+
 	return {x, y};
 }
 
@@ -70,10 +98,7 @@ Board.prototype.drawMoles = function () {
 			.addClass('mole')
 			.attr("mole-index", index);
 		}
-	});//here we are searching the listMoles and adding a new class in order to change the image background
-
-	//setTimeout(this.cleaningMoles(), 5000);
-	
+	});//here we are searching the listMoles and adding a new class in order to change the image background	
 };
 
 Board.prototype.clickOnCell = function () {
@@ -84,6 +109,7 @@ Board.prototype.clickOnCell = function () {
 			console.log($(this));
 			that.removeMoleFromArray($(this).attr('mole-index'));
 			$(this).removeAttr('mole-index').removeClass('mole');
+			that.totalMoles--;
 
 		}
 	});
@@ -104,6 +130,21 @@ Board.prototype.cleaningMoles = function () {
 };
 
 
+Board.prototype.update = function () {
+	console.log('Updating ...')
+	console.log('totalMoles', this.totalMoles);
+	console.log('this.columns*this.rows', this.columns*this.rows);
+
+	if (this.canMoreMolesBeAdded && this.columns*this.rows > this.totalMoles) {
+		this.massMoleGeneration();
+	}
+}
+
+Board.prototype.start = function () {
+	if(!this.intervalId) {
+		this.intervalId = setInterval(this.update.bind(this),2000);
+	}
+}
 
 
 
@@ -138,6 +179,6 @@ var board;
 
 $(document).ready(function() {
  
-  board = new Board(3,5);
+  board = new Board(3,3);
 
 });
