@@ -11,8 +11,10 @@ function Board (rows,columns){
 	this.initialScore        = 0;
 	this.totalMoles          = 0;
 	this.canMoreMolesBeAdded = true;
+	this.loose				 = false;
 
 	this.drawGrid();
+	//this.startGame();
 	this.massMoleGeneration();
 
 
@@ -76,10 +78,7 @@ Board.prototype.randomNumber = function (min, max) {
 Board.prototype.randomPosition = function () {
 	var x = Math.floor(Math.random()*this.columns);
 	var y = Math.floor(Math.random()*this.rows);
-	console.log(x);
-	console.log(y);
 	var hasMole = $('.cell[row="'+ y +'"][column="'+ x +'"]').hasClass('mole');// CHECKIN IF YOU HAVE A MOLE ON THE RANDOM POSITION
-	console.log(hasMole);
 	if( hasMole ) { // TO CHECK 
 		return false;
 	}	
@@ -137,15 +136,39 @@ Board.prototype.update = function () {
 
 	if (this.canMoreMolesBeAdded && this.columns*this.rows > this.totalMoles) {
 		this.massMoleGeneration();
-	}
+	}else
+	this.losingGame();
 }
 
 Board.prototype.start = function () {
-	if(!this.intervalId) {
+
+	if(!this.intervalId) 
+	{
+
 		this.intervalId = setInterval(this.update.bind(this),2000);
 	}
+	
 }
 
+/*Board.prototype.startGame = function () {
+
+	$('#start-game').on('click', function (){
+
+		this.start();
+	});
+
+}*/
+
+Board.prototype.losingGame = function () {
+
+	if( this.totalMoles===this.row*this.column)
+
+	{
+		console.log('lose');
+	}
+	
+
+}
 
 
 
@@ -165,7 +188,7 @@ function Mole (position){
 		x: position.x,
 		y: position.y,
 	};
-	this.time = 5000;
+	
 	this.score = 10;
 }
  
